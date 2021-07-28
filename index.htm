@@ -122,6 +122,7 @@ function move(){
 		py+=fatory[angulo]*3.2;
 		setTimeout('move();',30+(parseInt((680-(tempo++))/40)));
 	}
+	else if(tempo>750)location.href=location.pathname+"?stage="+(fase+2);
 	else inicia();
 }
 </script>
