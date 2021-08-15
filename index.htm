@@ -2,8 +2,11 @@
 <html>
 <title>::..</title>
 <meta name=viewport content='width=device-width'>
+<style>
+@keyframes entrada0{from{transform:rotateX(90deg);}to{transform:rotateX(0deg);}}
+@keyframes entrada1{from{transform:rotateY(90deg);}to{transform:rotateY(0deg);}}
+</style>
 <body style='background-color:#8c867f; margin:0px; height:100vh; display:flex; align-items:center; justify-content:center;' onKeyDown="vira(event.keyCode);" onKeyUp="para();" onhashchange="tempo=0;inicia();">
-<div id=main></div>
 </body>
 <script>
 fatorx=[9,8,7,6,5,4,3,2,1,0,-1,-2,-3,-4,-5,-6,-7,-8,-9,-8,-7,-6,-5,-4,-3,-2,-1,0,1,2,3,4,5,6,7,8];
@@ -23,9 +26,9 @@ tempo=0;
 function inicia(){
 	fase=parseInt(location.hash[1])-1;
 	if(!(fase>0&&fase<8))fase=0;
-	text="<div><progress id=progress value="+parseInt(Math.min(tempo,750)/7.5)+" max=100 style='margin-bottom:4px;'></progress><br><canvas id=canvas width=460 height=460 style='border-radius:10px;'></canvas><div id=carro style='position:relative; margin:0px auto; top:-85px; z-index:2; width:20px; height:40px; background-color:#000000; border-radius:4px;'><div style='width:10px; height:4px; background-color:#000000; border:5px solid #dcdfe4; border-top:none; border-bottom:none;'></div><div style='width:14px; height:20px; background-color:#777777; border:3px solid #000000;'></div></div><div style='text-align:center; margin-top:-38px;'>";
+	text="<div style='animation:entrada"+(fase%2)+" 1s;'><progress id=progress value="+parseInt(Math.min(tempo,750)/7.5)+" max=100 style='margin-bottom:4px;'></progress><br><canvas id=canvas width=460 height=460 style='border-radius:10px;'></canvas><div id=carro style='position:relative; margin:0px auto; top:-85px; z-index:2; width:20px; height:40px; background-color:#000000; border-radius:4px;'><div style='width:10px; height:4px; background-color:#000000; border:5px solid #dcdfe4; border-top:none; border-bottom:none;'></div><div style='width:14px; height:20px; background-color:#777777; border:3px solid #000000;'></div></div><div style='text-align:center; margin-top:-38px;'>";
 	for(x=0;x<8;x++)text+="&nbsp; &nbsp;<input type=radio value="+x+(fase==x?" checked":"")+" onclick=\"location.hash="+(x+1)+";\">&nbsp; &nbsp;";
-	document.getElementById("main").innerHTML=text+"</div></div></div>";
+	document.body.innerHTML=text+"</div></div>";
 	tempo=0;
 	angulo=0;
 	esq=false;
