@@ -1,0 +1,141 @@
+<body style='margin:20px 12px; background-color:#cacaca; font-family:Verdana;'>
+<style>
+div{border:1px solid #999999; padding:16px 12px; background-color:#ffffff; margin-bottom:8px; text-align:right; border-top-right-radius:20px;}
+pre{border:1px solid #999999; padding:6px 12px; overflow:scroll; text-align:left;}
+li{list-style-type:none; margin-left:4px; text-align:left;}
+</style>
+<h1>sem imagens</h1>
+<div><li>Linha 1</li><pre>&lt;!doctype html></pre></div>
+<div><li>Linha 2</li><pre>&lt;html></pre></div>
+<div><li>Linha 3</li><pre>&lt;title>::..&lt;/title></pre></div>
+<div><li>Linha 4</li><pre>&lt;meta name=viewport content='width=device-width'></pre></div>
+<div><li>Linha 5</li><pre>&lt;style></pre></div>
+<div><li>Linha 6</li><pre>@keyframes entrada0{from{transform:rotateX(90deg);}to{transform:rotateX(0deg);}}</pre>essa linha 6 define a animação do mapa se abrindo nas fases pares<br>a animação que é exibida a cada vez que a fase inicia<br>Na linha 29 o código &lt;div style='animation:entrada0 1s;'> atribui essa animação à div que contém o &lt;canvas> do jogo<br><br>esse é um comando css que determina que a animação vai de 90graus até 0 graus<br>(como se fosse uma carta de baralha virando no eixo X)</div>
+<div><li>Linha 7</li><pre>@keyframes entrada1{from{transform:rotateY(90deg);}to{transform:rotateY(0deg);}}</pre>essa linha 7 define a animação do mapa se abrindo nas fases ímpares<br>a animação que é exibida a cada vez que a fase inicia<br>Na linha 29 o código &lt;div style='animation:entrada1 1s;'> atribui essa animação à div que contém o &lt;canvas> do jogo<br><br>esse é um comando css que determina que a animação vai de 90graus até 0 graus<br>(como se fosse uma carta de baralha virando no eixo Y)</div>
+<div><li>Linha 8</li><pre>&lt;/style></pre></div>
+<div><li>Linha 9</li><pre>&lt;body style='background-color:#8c867f; margin:0px; height:100vh; display:flex; align-items:center; justify-content:center;' onKeyDown="vira(event.keyCode);" onKeyUp="para();" onhashchange="tempo=0;inicia();"></pre>essa linha 9 determina a cor do background da página<br>também determina o alinhamento do elementos no meio da tela<br><br>essa linha 9 determina que a a função <b>vira</b> será executada quando o user <b>pressionar</b> alguma tecla (onKeyDown)<br>essa linha 9 determina que a a função <b>para</b> será executada quando o user <b>soltar</b> alguma tecla (onKeyUp)<br><br>quando o user passa de fase (ou escolhe uma fase no 'painel') a <b>hash</b> é alterada<br><br>essa linha 9 determina que quando a hash for alterada<br>a variável tempo seja zerada&nbsp; &nbsp; &nbsp; <br>e&nbsp; &nbsp; &nbsp; <br>a função <b>inicia</b> seja executada&nbsp; &nbsp; &nbsp; </div>
+<div><li>Linha 10</li><pre>&lt;/body></pre></div>
+<div><li>Linha 11</li><pre>&lt;script></pre></div>
+<div><li>Linha 12</li><pre>fatorx=[9,8,7,6,5,4,3,2,1,0,-1,-2,-3,-4,-5,-6,-7,-8,-9,-8,-7,-6,-5,-4,-3,-2,-1,0,1,2,3,4,5,6,7,8];</pre>o fatorX determina quantos pixels o carro se desloca no eixo X<br>se por exemplo o carro estiver a 30 graus de inclinação, a variável ângulo vale três e fatorx[3] vale 6<br>nessa situação o carro se desloca 6px à direita</div>
+<div><li>Linha 13</li><pre>fatory=[0,-1,-2,-3,-4,-5,-6,-7,-8,-9,-8,-7,-6,-5,-4,-3,-2,-1,0,1,2,3,4,5,6,7,8,9,8,7,6,5,4,3,2,1];</pre>o fatorY determina quantos pixels o carro se desloca no eixo Y<br>se por exemplo o carro estiver a 330 graus de inclinação, a variável ângulo vale trinta e três e fatory[33] vale 3<br>nessa situação o carro se desloca 3px pra cima</div>
+<div><li>Linha 14</li><pre>pistas=[</pre></div>
+<div><li>Linha 15</li><pre>[[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,2,3,3,3,3,3,3,3,3,3,3,3,3,3,3,0,0,0,0],[0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0],[0,0,0,0,4,4,4,4,4,4,2,0,4,4,4,4,4,4,1,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,2,0,1,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,2,3,3,3,3,0,1,3,3,3,3,0,0,0,0,0,0],[0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0],[0,0,0,0,0,0,4,4,4,4,2,0,4,4,4,4,1,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,2,0,1,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,2,3,3,0,1,3,3,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,2,0,0,0,0,0,1,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,4,4,2,0,4,4,1,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,2,0,1,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,2,3,3,3,3,3,3,0,1,3,3,3,3,3,3,0,0,0,0],[0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0],[0,0,0,0,4,4,4,4,4,4,4,4,4,4,4,4,4,4,1,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]], //pain</pre>esse é o traçado da primeira fase<br><br><b>0</b> significa grama<br><b>1</b> significa seta para cima<br><b>2</b> significa seta para baixo<br><b>3</b> significa seta para esquerda<br><b>4</b> significa seta para baixo</div>
+<div><li>Linha 16</li><pre>[[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[4,4,4,4,4,4,4,4,4,4,4,4,2,0,0,0,4,4,4,4,4,2,0],[1,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,1,0,0,0,0,2,0],[1,0,2,3,3,3,3,3,3,3,3,0,2,0,0,0,1,0,2,3,3,3,0],[1,0,2,0,0,0,0,0,0,0,1,0,2,0,0,0,1,0,2,0,0,0,0],[1,0,2,0,4,4,2,0,0,0,1,0,2,0,0,0,1,0,4,4,4,4,2],[1,0,2,0,1,0,2,0,0,0,1,0,2,0,0,0,1,0,0,0,0,0,2],[1,0,2,0,1,0,2,0,0,0,1,3,3,0,0,0,1,3,3,3,3,0,2],[1,0,2,0,1,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,2],[1,0,2,0,1,0,4,4,4,4,4,4,4,4,4,4,4,4,4,4,1,0,2],[1,0,2,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2],[1,0,2,0,1,3,3,3,3,0,2,3,3,0,2,3,3,3,3,3,3,3,3],[1,0,2,0,0,0,0,0,1,0,2,0,1,0,2,0,0,0,0,0,0,0,0],[1,0,4,4,4,4,4,4,1,0,2,0,1,0,2,0,0,0,0,0,0,0,0],[1,0,0,0,0,0,0,0,0,0,2,0,1,0,2,0,0,0,0,0,0,0,0],[1,3,3,3,3,3,3,3,3,3,3,0,1,3,3,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]], //dark</pre>esse é o traçado da segunda fase</div>
+<div><li>Linha 17</li><pre>[[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,4,4,4,4,4,4,4,4,4,4,4,4,4,4,2,0,0,0,0],[0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0],[0,0,0,0,1,3,3,3,3,3,3,0,2,3,3,3,3,3,3,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,1,0,2,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,4,4,4,4,4,4,1,0,4,4,4,4,4,4,2,0,0,0,0],[0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0],[0,0,0,0,1,0,2,3,3,3,3,3,3,3,3,3,3,0,2,0,0,0,0],[0,0,0,0,1,0,2,0,0,0,0,0,0,0,0,0,1,0,2,0,0,0,0],[0,0,0,0,1,0,2,0,4,4,4,4,4,4,2,0,1,0,2,0,0,0,0],[0,0,0,0,1,0,2,0,1,0,0,0,0,0,2,0,1,0,2,0,0,0,0],[0,0,0,0,1,0,2,0,1,0,2,3,3,0,2,0,1,0,2,0,0,0,0],[0,0,0,0,1,0,2,0,1,0,2,0,1,0,2,0,1,0,2,0,0,0,0],[0,0,0,0,1,3,3,0,1,3,3,0,1,0,4,4,1,0,2,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,2,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,1,3,3,3,3,3,3,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]], //ugly</pre>esse é o traçado da terceira fase</div>
+<div><li>Linha 18</li><pre>[[0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,4,2,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,2,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,4,4,1,0,4,4,2,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,2,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,4,4,1,0,2,3,3,0,4,4,2,0,0],[0,0,0,0,0,0,0,0,0,0,1,0,0,0,2,0,1,0,0,0,2,0,0],[0,0,0,0,0,0,0,0,4,4,1,0,2,3,3,0,1,3,3,0,4,4,2],[0,0,0,0,0,0,0,0,1,0,0,0,2,0,0,0,0,0,1,0,0,0,2],[0,0,0,0,0,0,4,4,1,0,2,3,3,0,0,0,4,4,1,0,2,3,3],[0,0,0,0,0,0,1,0,0,0,2,0,0,0,0,0,1,0,0,0,2,0,0],[0,0,0,0,4,4,1,0,2,3,3,0,0,0,4,4,1,0,2,3,3,0,0],[0,0,0,0,1,0,0,0,2,0,0,0,0,0,1,0,0,0,2,0,0,0,0],[0,0,4,4,1,0,2,3,3,0,0,0,4,4,1,0,2,3,3,0,0,0,0],[0,0,1,0,0,0,2,0,0,0,0,0,1,0,0,0,2,0,0,0,0,0,0],[4,4,1,0,2,3,3,0,0,0,0,0,1,0,2,3,3,0,0,0,0,0,0],[1,0,0,0,2,0,0,0,0,0,0,0,1,0,2,0,0,0,0,0,0,0,0],[1,3,3,3,3,0,0,0,0,0,0,0,1,3,3,0,0,0,0,0,0,0,0]], //tank</pre>esse é o traçado da quarta fase</div>
+<div><li>Linha 19</li><pre>[[0,4,4,4,2,0,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,2,0],[4,1,0,0,2,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,2],[1,0,0,0,2,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2],[1,0,0,0,2,0,1,3,3,3,3,3,3,3,3,3,3,3,3,3,0,0,2],[1,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,2],[1,0,0,0,2,0,0,0,4,4,4,4,4,4,4,4,4,2,0,1,0,0,2],[1,0,0,0,2,0,0,0,1,0,0,0,0,0,0,0,0,2,0,1,0,0,2],[1,0,0,0,2,0,0,0,1,0,2,3,3,0,0,0,0,4,4,1,0,0,2],[1,0,0,0,4,4,4,4,1,0,2,0,1,0,0,0,0,0,0,0,0,0,2],[1,0,0,0,0,0,0,0,0,0,2,0,1,0,0,0,2,3,3,3,3,0,2],[1,3,3,3,3,3,3,3,3,0,2,0,1,0,0,0,2,0,0,0,1,0,2],[0,0,0,0,0,0,0,0,1,0,2,0,1,3,3,0,2,0,0,0,1,3,3],[4,4,4,4,4,4,4,4,1,0,2,0,0,0,1,0,2,0,0,0,0,0,0],[1,0,0,0,0,0,0,0,0,0,4,4,2,0,1,0,2,0,4,4,4,4,2],[1,0,0,0,0,0,0,0,0,0,0,0,2,0,1,0,4,4,1,0,0,0,2],[1,3,0,0,0,0,0,0,0,0,0,0,2,0,1,0,0,0,0,0,0,2,3],[0,1,3,3,3,3,3,3,3,3,3,3,3,0,1,3,3,3,3,3,3,3,0]], //fear</pre>esse é o traçado da quinta fase</div>
+<div><li>Linha 20</li><pre>[[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,4,4,4,4,4,4,4,4,4,4,4,4,2,0,0,0,0,0],[0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0],[0,0,0,4,4,1,0,0,2,3,3,0,2,3,3,0,0,4,4,2,0,0,0],[0,0,0,1,0,0,0,0,2,0,1,0,2,0,1,0,0,0,0,2,0,0,0],[4,4,4,1,0,0,2,3,3,0,1,0,2,0,1,3,3,0,0,4,4,4,2],[1,0,0,0,0,0,2,0,0,0,1,0,2,0,0,0,1,0,0,0,0,0,2],[1,0,2,3,3,0,2,0,4,4,1,0,4,4,2,0,1,0,2,3,3,0,2],[1,0,2,0,1,0,2,0,1,0,0,0,0,0,2,0,1,0,2,0,1,0,2],[1,3,3,0,1,3,3,0,1,0,2,3,3,0,2,0,1,3,3,0,1,3,3],[0,0,0,0,0,0,0,0,1,0,2,0,1,0,2,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,1,0,2,0,1,0,2,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,1,0,2,0,1,0,2,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,1,0,2,0,1,0,2,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,1,0,2,0,1,0,2,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,1,3,3,0,1,3,3,0,0,0,0,0,0,0,0]], //dust</pre>esse é o traçado da sexta fase</div>
+<div><li>Linha 21</li><pre>[[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,2,3,3,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,2,0,1,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,2,3,3,0,1,3,3,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,2,0,0,0,0,0,1,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,2,3,3,0,4,4,2,0,1,3,3,0,0,0,0,0,0],[0,0,0,0,0,0,2,0,0,0,1,0,2,0,0,0,1,0,0,0,0,0,0],[0,0,0,0,2,3,3,0,4,4,1,0,4,4,4,4,1,0,0,0,0,0,0],[0,0,0,0,2,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,4,4,2,0,1,3,3,0,2,3,3,3,3,0,0,0,0,0,0],[0,0,0,0,0,0,2,0,0,0,1,0,2,0,0,0,1,0,0,0,0,0,0],[0,0,0,0,0,0,4,4,2,0,1,3,3,0,4,4,1,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,2,0,0,0,0,0,1,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,4,4,2,0,4,4,1,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,2,0,1,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,4,4,1,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]], //fire</pre>esse é o traçado da penútima fase</div>
+<div><li>Linha 22</li><pre>[[0,0,0,0,4,4,4,4,4,4,4,4,4,4,4,4,4,4,2,0,0,0,0],[0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0],[0,0,0,0,1,3,3,3,3,3,3,0,2,3,3,3,3,3,3,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,1,0,2,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,4,4,2,0,0,0,1,0,2,0,0,0,4,4,2,0,0,0,0],[0,0,0,0,1,0,2,0,0,0,1,0,2,0,0,0,1,0,2,0,0,0,0],[0,0,0,0,1,0,2,0,0,0,1,0,2,0,0,0,1,0,2,0,0,0,0],[0,0,0,0,1,0,4,4,4,4,1,0,4,4,4,4,1,0,2,0,0,0,0],[0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0],[0,0,0,0,1,0,2,3,3,3,3,0,2,3,3,3,3,0,2,0,0,0,0],[0,0,0,0,1,0,2,0,0,0,1,0,2,0,0,0,1,0,2,0,0,0,0],[0,0,0,0,1,0,2,0,0,0,1,0,2,0,0,0,1,0,2,0,0,0,0],[0,0,0,0,1,0,2,0,0,0,1,0,2,0,0,0,1,0,2,0,0,0,0],[0,0,0,0,1,0,2,0,4,4,1,0,4,4,2,0,1,0,2,0,0,0,0],[0,0,0,0,1,0,2,0,1,0,0,0,0,0,2,0,1,0,2,0,0,0,0],[0,0,0,0,1,0,2,0,1,3,3,3,3,3,3,0,1,0,2,0,0,0,0],[0,0,0,0,1,3,3,0,0,0,0,0,0,0,0,0,1,3,3,0,0,0,0]]  //hell</pre>esse é o traçado da última fase</div>
+<div><li>Linha 23</li><pre>];</pre></div>
+<div><li>Linha 24</li><pre>inicios=[[15,18],[6,0],[3,4],[16,0],[10,0],[10,0],[3,12],[2,4]];</pre>essa linha 24 determina as posições iniciais do carrinho em cada fase<br><br>na fase 1 a posição é [15,18]<br>que significa que o carrinho começa na décima quinta linha, na casa 18<br><br>na fase 6 a posição é [10,0]<br>que significa que o carrinho começa na décima linha, na casa 0<br><br>em todas as fases o carrinho começa numa casa com a seta apontando para cima</div>
+<div><li>Linha 25</li><pre>tempo=0;</pre>essa variável serve para identificar se a página está <b>modoMapa</b> ou <b>modoJogo</b><br>se tempo == 0 então o mapa é exibido<br>essa variável também serve para calcular a velocidade do carrinho que sempre vai aumentando</div>
+<div><li>Linha 26</li><pre>function inicia(){</pre>essa função desenha na tela o mapa e inicializa as variáveis que serão usadas no jogo</div>
+<div><li>Linha 27</li><pre>	fase=parseInt(location.hash[1])-1;</pre>essa linha 27 procura na 'querystring' a fase que deve ser exibida e armazena na variável <b>fase</b></div>
+<div><li>Linha 28</li><pre>	if(!(fase>0&&fase&lt;8))fase=0;</pre>se o valor da fase não for um número entre 1 e 7 então a variável fase recebe o valor <b>zero</b></div>
+<div><li>Linha 29</li><pre>	text="&lt;div style='animation:entrada"+(fase%2)+" 1s;'>&lt;progress id=progress value="+parseInt(Math.min(tempo,750)/7.5)+" max=100 style='margin-bottom:4px;'>&lt;/progress>&lt;br>&lt;canvas id=canvas width=460 height=460 style='border-radius:10px;'>&lt;/canvas>&lt;div id=carro style='position:relative; margin:0px auto; top:-85px; z-index:2; width:20px; height:40px; background-color:#000000; border-radius:4px;'>&lt;div style='width:10px; height:4px; background-color:#000000; border:5px solid #dcdfe4; border-top:none; border-bottom:none;'>&lt;/div>&lt;div style='width:14px; height:20px; background-color:#777777; border:3px solid #000000;'>&lt;/div>&lt;/div>&lt;div style='text-align:center; margin-top:-38px;'>";</pre>essa linha 29 cria uma string que é a tela do jogo<br><br>tem o &lt;canvas> onde é desenhada a pista<br>tem o &lt;progressBar> que indica quanto da fase foi percorrido<br>tem o carro (que é composto por três &lt;divs>)<br>...<br><br>nessa linha 29 tem o código css que chama a animação do início de cada fase</div>
+<div><li>Linha 30</li><pre>	for(x=0;x&lt;8;x++)text+="&amp;nbsp; &amp;nbsp;&lt;input type=radio value="+x+(fase==x?" checked":"")+" onclick=\"location.hash="+(x+1)+";\">&amp;nbsp; &amp;nbsp;";</pre>essa linha coloca os oito <b>radioButton</b> embaixo do canvas para que o jogador possa selecionar todas as fases</div>
+<div><li>Linha 31</li><pre>	document.body.innerHTML=text+"&lt;/div>&lt;/div>";</pre></div>
+<div><li>Linha 32</li><pre>	tempo=0;</pre></div>
+<div><li>Linha 33</li><pre>	angulo=0;</pre>essa variável armazena o ângulo de inclinação do carrinho em relação à pista<br>um valor entre 0 e 35</div>
+<div><li>Linha 34</li><pre>	esq=false;</pre>essa variável armazena se a tecla esq está pressionada</div>
+<div><li>Linha 35</li><pre>	dir=false;</pre>essa variável armazena se a tecla dir está pressionada</div>
+<div><li>Linha 36</li><pre>	px=(inicios[fase][0]*-200)+140;</pre>essa linha 36 calcula a posição do carrinho na pista<br>baseando-se nos valores declarados na linha 24</div>
+<div><li>Linha 37</li><pre>	py=(inicios[fase][1]*-200)+130;</pre>essa linha 37 calcula a posição do carrinho na pista<br>baseando-se nos valores declarados na linha 24</div>
+<div><li>Linha 38</li><pre>	ctx=document.getElementById("canvas").getContext("2d");</pre></div>
+<div><li>Linha 39</li><pre>	ctx.fillStyle="#626f55";</pre>verde musgo</div>
+<div><li>Linha 40</li><pre>	ctx.fillRect(0,0,460,460);</pre>bg do mapa</div>
+<div><li>Linha 41</li><pre>	ctx.fillStyle="#dcdfe4";</pre>cinza quase branco</div>
+<div><li>Linha 42</li><pre>	for(x=0;x&lt;pistas[fase].length;x++)for(y=0;y&lt;pistas[fase][x].length;y++)if(pistas[fase][x][y]!=0)ctx.fillRect(13+(19*y),25+(19*x),18,18);</pre>essa linha 42 desenha no canvas<br>cada quadradinho do mapa<br>um por um</div>
+<div><li>Linha 43</li><pre>	ctx.fillStyle="#772222";</pre>vermelho</div>
+<div><li>Linha 44</li><pre>	ctx.fillRect(12+(19*inicios[fase][1]),25+(19*inicios[fase][0]),19,18);</pre>a posição inicial do carrinho</div>
+<div><li>Linha 45</li><pre>	ctx.fillStyle="#aca69f";</pre>cinza (círculo em volta do carro)</div>
+<div><li>Linha 46</li><pre>	ctx.beginPath();</pre>começa o desenho (uma bola)</div>
+<div><li>Linha 47</li><pre>	ctx.arc(230,400,40,0,2*Math.PI);</pre>a função <b>arc</b> serve para desenhar uma bola no canvas</div>
+<div><li>Linha 48</li><pre>	ctx.fill();</pre>termina o desenho do círculo<br>preenche o círculo com a cor cinza</div>
+<div><li>Linha 49</li><pre>	ctx.fillStyle="#626f55";</pre>verde musgo</div>
+<div><li>Linha 50</li><pre>	ctx.beginPath();</pre>começa o desenho</div>
+<div><li>Linha 51</li><pre>	ctx.arc(230,400,30,0,2*Math.PI);</pre>a função <b>arc</b> serve para desenhar uma bola no canvas</div>
+<div><li>Linha 52</li><pre>	ctx.fill();</pre>desenha o círculo verde dentro do círculo cinza<br>fazendo parecer que é apenas uma borda cinza</div>
+<div><li>Linha 53</li><pre>}</pre>fim da função inicia</div>
+<div><li>Linha 54</li><pre>if(document.body.clientWidth>600)inicia();</pre>essa linha 54 é executada assim que a página é carregada<br><br>se a tela tiver mais de 600px de largura a função <b>inicia</b> é executada</div>
+<div><li>Linha 55</li><pre>else alert("Jogo de Computador");</pre>caso contrário é exibida uma mensagem informando ao usuário que esse é um jogo de computador</div>
+<div><li>Linha 56</li><pre>function vira(k){</pre>essa função é executada toda vez que o jogador pressiona qualquer tecla</div>
+<div><li>Linha 57</li><pre>	if(k==37)esq=true;</pre>37 é o código da tecla esq</div>
+<div><li>Linha 58</li><pre>	if(k==39)dir=true;</pre>39 é o código da tecla dir</div>
+<div><li>Linha 59</li><pre>	if(tempo==0){</pre>se a tela do mapa está sendo exibida</div>
+<div><li>Linha 60</li><pre>		move();</pre>pôe o carrinho para andar</div>
+<div><li>Linha 61</li><pre>		document.getElementById('carro').style.top="-230px";</pre>coloca o carrinho no meio do canvas</div>
+<div><li>Linha 62</li><pre>	}</pre></div>
+<div><li>Linha 63</li><pre>}</pre></div>
+<div><li>Linha 64</li><pre>function para(){</pre>essa função é executada toda vez que o jogador solta qualquer tecla</div>
+<div><li>Linha 65</li><pre>	esq=false;</pre></div>
+<div><li>Linha 66</li><pre>	dir=false;</pre></div>
+<div><li>Linha 67</li><pre>}</pre></div>
+<div><li>Linha 68</li><pre>function move(){</pre>essa é a função mais importante do jogo<br>ela redesenha a tela várias vezes por segundo</div>
+<div><li>Linha 69</li><pre>	ctx.fillStyle="#626f55";</pre>verde musgo (a grama durante a corrida)</div>
+<div><li>Linha 70</li><pre>	ctx.fillRect(-100,-100,660,660);</pre>preenche o canvas com o verde</div>
+<div><li>Linha 71</li><pre>	if(esq)angulo=(angulo+35)%36;</pre>a variável angulo recebe sempre um inteiro entre 0 e 35<br>se a tecla esq está pressionada cada vez que essa linha 71 é executada o ângulo decrementa 1</div>
+<div><li>Linha 72</li><pre>	if(dir)angulo=(angulo+1)%36;</pre>se a tecla dir está pressionada cada vez que essa linha 72 é executada o ângulo aumenta 1</div>
+<div><li>Linha 73</li><pre>	ctx.translate(230,230);</pre>essa linha 73 serve para rotacionar a pista</div>
+<div><li>Linha 74</li><pre>	if(esq)ctx.rotate(Math.PI/18);</pre>se a tecla esq está pressionada o background (com a pista) gira 10 graus sentido horário</div>
+<div><li>Linha 75</li><pre>	if(dir)ctx.rotate(-Math.PI/18);</pre>se a tecla dir está pressionada o background (com a pista) gira 10 graus sentido anti-horário</div>
+<div><li>Linha 76</li><pre>	ctx.translate(-230,-230);</pre>essa linha 76 serve para rotacionar a pista</div>
+<div><li>Linha 77</li><pre>	for(x=0;x&lt;pistas[fase].length;x++)for(y=0;y&lt;pistas[fase][x].length;y++)if(pistas[fase][x][y]!=0){</pre>essa linha percorre todos o valores do traçado da pista<br><br><b>0</b> significa grama<br><b>1</b> significa seta para cima<br><b>2</b> significa seta para baixo<br><b>3</b> significa seta para esquerda<br><b>4</b> significa seta para baixo</div>
+<div><li>Linha 78</li><pre>		ctx.fillStyle="#7a8b65";</pre>verde claro / asfalto</div>
+<div><li>Linha 79</li><pre>		ctx.fillRect((200*y)+py,(200*x)+px,200,200);</pre>desenha o quadrado<br>um por vez</div>
+<div><li>Linha 80</li><pre>		ctx.fillStyle="#bdbb96";</pre>amarelo da seta</div>
+<div><li>Linha 81</li><pre>		ctx.beginPath();</pre>começa a desenha cada uma das setas no asfalto</div>
+<div><li>Linha 82</li><pre>		if(pistas[fase][x][y]==1){</pre>seta pra cima</div>
+<div><li>Linha 83</li><pre>			ctx.moveTo((200*y)+80+py,(200*x)+150+px);</pre></div>
+<div><li>Linha 84</li><pre>			ctx.lineTo((200*y)+120+py,(200*x)+150+px);</pre></div>
+<div><li>Linha 85</li><pre>			ctx.lineTo((200*y)+120+py,(200*x)+100+px);</pre></div>
+<div><li>Linha 86</li><pre>			ctx.lineTo((200*y)+150+py,(200*x)+100+px);</pre></div>
+<div><li>Linha 87</li><pre>			ctx.lineTo((200*y)+100+py,(200*x)+50+px);</pre></div>
+<div><li>Linha 88</li><pre>			ctx.lineTo((200*y)+50+py,(200*x)+100+px);</pre></div>
+<div><li>Linha 89</li><pre>			ctx.lineTo((200*y)+80+py,(200*x)+100+px);</pre></div>
+<div><li>Linha 90</li><pre>		}</pre></div>
+<div><li>Linha 91</li><pre>		if(pistas[fase][x][y]==2){</pre>seta pra baixo</div>
+<div><li>Linha 92</li><pre>			ctx.moveTo((200*y)+80+py,(200*x)+50+px);</pre></div>
+<div><li>Linha 93</li><pre>			ctx.lineTo((200*y)+120+py,(200*x)+50+px);</pre></div>
+<div><li>Linha 94</li><pre>			ctx.lineTo((200*y)+120+py,(200*x)+100+px);</pre></div>
+<div><li>Linha 95</li><pre>			ctx.lineTo((200*y)+150+py,(200*x)+100+px);</pre></div>
+<div><li>Linha 96</li><pre>			ctx.lineTo((200*y)+100+py,(200*x)+150+px);</pre></div>
+<div><li>Linha 97</li><pre>			ctx.lineTo((200*y)+50+py,(200*x)+100+px);</pre></div>
+<div><li>Linha 98</li><pre>			ctx.lineTo((200*y)+80+py,(200*x)+100+px);</pre></div>
+<div><li>Linha 99</li><pre>		}</pre></div>
+<div><li>Linha 100</li><pre>		if(pistas[fase][x][y]==3){</pre>seta pra esquerda</div>
+<div><li>Linha 101</li><pre>			ctx.moveTo((200*y)+150+py,(200*x)+80+px);</pre></div>
+<div><li>Linha 102</li><pre>			ctx.lineTo((200*y)+150+py,(200*x)+120+px);</pre></div>
+<div><li>Linha 103</li><pre>			ctx.lineTo((200*y)+100+py,(200*x)+120+px);</pre></div>
+<div><li>Linha 104</li><pre>			ctx.lineTo((200*y)+100+py,(200*x)+150+px);</pre></div>
+<div><li>Linha 105</li><pre>			ctx.lineTo((200*y)+50+py,(200*x)+100+px);</pre></div>
+<div><li>Linha 106</li><pre>			ctx.lineTo((200*y)+100+py,(200*x)+50+px);</pre></div>
+<div><li>Linha 107</li><pre>			ctx.lineTo((200*y)+100+py,(200*x)+80+px);</pre></div>
+<div><li>Linha 108</li><pre>		}</pre></div>
+<div><li>Linha 109</li><pre>		if(pistas[fase][x][y]==4){</pre>seta pra direita</div>
+<div><li>Linha 110</li><pre>			ctx.moveTo((200*y)+50+py,(200*x)+80+px);</pre></div>
+<div><li>Linha 111</li><pre>			ctx.lineTo((200*y)+50+py,(200*x)+120+px);</pre></div>
+<div><li>Linha 112</li><pre>			ctx.lineTo((200*y)+100+py,(200*x)+120+px);</pre></div>
+<div><li>Linha 113</li><pre>			ctx.lineTo((200*y)+100+py,(200*x)+150+px);</pre></div>
+<div><li>Linha 114</li><pre>			ctx.lineTo((200*y)+150+py,(200*x)+100+px);</pre></div>
+<div><li>Linha 115</li><pre>			ctx.lineTo((200*y)+100+py,(200*x)+50+px);</pre></div>
+<div><li>Linha 116</li><pre>			ctx.lineTo((200*y)+100+py,(200*x)+80+px);</pre></div>
+<div><li>Linha 117</li><pre>		}</pre></div>
+<div><li>Linha 118</li><pre>		ctx.fill();</pre>aqui termina o desenho de uma seta<br>o desenho começa com o <b>beginPath()</b><br>daí o comando <b>moveTo</b> posiciona o '<b>pincel</b>' num corner da seta<br>depois os seis <b>lineTo</b> cercam o perímetro da forma da seta<br>daí a função <b>fill</b> preenche o caminho que o 'pincel' percorreu/delimitou</div>
+<div><li>Linha 119</li><pre>	}</pre></div>
+<div><li>Linha 120</li><pre>	document.getElementById('progress').value=parseInt(Math.min(tempo,750)/7.5);</pre>essa linha exibe a porcentagem concluída da fase</div>
+<div><li>Linha 121</li><pre>	lx=Math.ceil((-px+30)/200);</pre>essa linha 121 calcula em qual 'casa' ou 'ladrilho' ou 'quadrado' o carro está<br>divide o valor de px (que armazena a posição do carro) por 200 (que é o tamanho de cada quadrado)</div>
+<div><li>Linha 122</li><pre>	ly=Math.ceil((-py+30)/200);</pre>essa linha 122 calcula em qual 'casa' ou 'ladrilho' ou 'quadrado' o carro está<br>divide o valor de py (que armazena a posição do carro) por 200 (que é o tamanho de cada quadrado)</div>
+<div><li>Linha 123</li><pre>	if(lx>=0&&ly>=0&&lx&lt;pistas[fase].length&&ly&lt;pistas[fase][0].length&&pistas[fase][lx][ly]!=0){</pre>se o carro está sobre algum ladrilho válido</div>
+<div><li>Linha 124</li><pre>		px+=fatorx[angulo]*3.2;</pre>atualiza a posição do carro</div>
+<div><li>Linha 125</li><pre>		py+=fatory[angulo]*3.2;</pre>atualiza a posição do carro</div>
+<div><li>Linha 126</li><pre>		setTimeout('move();',30+(parseInt((680-(tempo++))/40)));</pre>calcula o tempo para desenhar de novo a tela do jogo</div>
+<div><li>Linha 127</li><pre>	}</pre></div>
+<div><li>Linha 128</li><pre>	else if(tempo>750)location.hash=fase+2;</pre>se não está sobre nenhum ladrilho/quadrado válido<br>mas já completou 100% da fase<br><br>muda de fase (alterando a querystring)</div>
+<div><li>Linha 129</li><pre>	else inicia();</pre>se não está sobre nenhum ladrilho/quadrado válido<br>e não completou 100% da fase<br>chama a função <b>inicia()</b> que desenha a telaMapa</div>
+<div><li>Linha 130</li><pre>}</pre></div>
+<div><li>Linha 131</li><pre>&lt;/script></pre></div>
+<div><li>Linha 132</li><pre>&lt;/html></pre></div>
+<a style='color:#3333dd; text-decoration:none; float:right; margin:2px 4px 12px 0px; font-weight:bold; font-size:26px;' href=index.htm target=_blank>jogar</a>
+</body>
